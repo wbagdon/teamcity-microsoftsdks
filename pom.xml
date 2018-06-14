@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>teamcity</groupId>
   <artifactId>teamcity-microsoftsdks</artifactId>
-  <version>2.3.1</version>
+  <version>2.4.0</version>
   <packaging>pom</packaging>
   <properties>
-    <teamcity-version>8.1.4</teamcity-version>
+    <teamcity-version>2018.2</teamcity-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <repositories>
