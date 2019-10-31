@@ -3,6 +3,7 @@
 ### Java ###
 *.class
 
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -101,6 +102,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# VSCode
+.project
+.settings/
 
 ### Maven ###
 target/
