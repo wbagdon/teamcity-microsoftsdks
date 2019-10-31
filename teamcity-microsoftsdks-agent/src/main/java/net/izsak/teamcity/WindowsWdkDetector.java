@@ -21,12 +21,13 @@ public class WindowsWdkDetector extends SdkDetector {
     }
 
     private static Map<String, String> createVersionMap() {
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<String, String>();
         map.put("1607", "10.0.14393.0");
         map.put("1703", "10.0.15063.0");
         map.put("1709", "10.0.16299.0");
         map.put("1803", "10.0.17134.0");
         map.put("1809", "10.0.17763.0");
+        map.put("1903", "10.0.18362.0");
         return map;
     }
 
@@ -42,7 +43,7 @@ public class WindowsWdkDetector extends SdkDetector {
             LOG.debug("Windows SDK/WDK versions detected by this plugin: " + versionString);
         }
 
-        List<SdkVersion> detectedVersions = new ArrayList<>();
+        List<SdkVersion> detectedVersions = new ArrayList<SdkVersion>();
         for (Map.Entry<String, String> version : versionsToDetect.entrySet()) {
             SdkVersion sdkVersion = detectSdkVersion(version);
             if (sdkVersion != null)
@@ -58,14 +59,16 @@ public class WindowsWdkDetector extends SdkDetector {
 
         LOG.debug("Looking for WDK version " + version + " at registry path HKLM\\" + versionKey);
 
-        String fullVersion = this.registry.readRegistryText(Win32RegistryAccessor.Hive.LOCAL_MACHINE, Bitness.BIT64, versionKey, "OptionId.WindowsDriverKitComplete");
+        String fullVersion = this.registry.readRegistryText(Win32RegistryAccessor.Hive.LOCAL_MACHINE, Bitness.BIT64,
+                versionKey, "OptionId.WindowsDriverKitComplete");
         if (fullVersion == null) {
             LOG.debug("Did not find FullVersion key for WDK " + version);
             return null;
         }
         LOG.debug("REG value = " + fullVersion);
 
-        String installPath = this.registry.readRegistryText(Win32RegistryAccessor.Hive.LOCAL_MACHINE, Bitness.BIT64, basePath, "KitsRoot10");
+        String installPath = this.registry.readRegistryText(Win32RegistryAccessor.Hive.LOCAL_MACHINE, Bitness.BIT64,
+                basePath, "KitsRoot10");
         if (installPath == null) {
             LOG.debug("Did not find InstallPath key for WDK " + version);
             return null;
